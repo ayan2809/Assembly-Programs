@@ -1,0 +1,220 @@
+h
+                andb    fl,el
+                orb     fl,tl
+                andb    tl,al,bh
+                andb    el,xl,yl
+                andb    el,zh
+                andb    tl,el
+                orb     fl,tl
+                jne     clr
+                cmpb    count,#08h
+                je      clr
+                sjmp    scr_1_check
+clr:            clrb    count   
+                ljmp    loop
+;
+; check for scr_1
+;
+scr_1_check:    andb    tl,al,zh
+                andb    tl,yl
+                andb    tl,xh
+                andb    fl,xh,yh
+                andb    fl,zh
+                orb     tl,fl
+                je      scr_2_check
+                lcall   out_scr_1
+                incb    count
+                ljmp    wait
+lxa:            sjmp    lxa
+;
+;
+;  check for scr_2
+;
+scr_2_check:    andb    tl,al,bl
+                andb    tl,zl
+                andb    tl,xh
+                andb    fl,al,bh
+                andb    sl,ah,bl
+                orb     fl,sl
+                andb    fl,zl
+                andb    fl,yh
+                andb    fl,xh
+                orb     tl,fl
+                je      scr_3_check
+                lcall   out_scr_2     
+                incb    count
+                ljmp    wait
+lxb:            sjmp    lxb
+; 
+;
+scr_3_check:    andb    tl,al,zl
+                andb    tl,yh    
+                andb    tl,xl
+                andb    fl,al,bh
+                andb    jl,ah,bl
+                orb     fl,jl
+                andb    fl,zl
+                andb    fl,yl
+                andb    fl,xh
+                andb    el,xh,yh
+                andb    el,bh
+                andb    el,ah
+                andb    sl,yl,xl
+                andb    sl,bl
+                andb    sl,al
+                orb     sl,el
+                andb    sl,zl
+                orb     sl,fl
+                orb     sl,tl
+                je      scr_4_check              
+                lcall   out_scr_3
+                incb    count
+                ljmp    wait
+lxc:            sjmp    lxc
+;
+; check for scr_4
+;
+scr_4_check:    andb    tl,zh,xl
+                andb    tl,yh
+                andb    tl,al
+                andb    fl,ah,xh
+                andb    sl,al,xl
+                orb     fl,sl
+                andb    el,yl,zh
+                andb    el,bl
+                andb    el,fl
+                orb     tl,el
+                je      con              
+                lcall   out_scr_4
+con:            incb    count
+                ljmp    wait
+lxy:            sjmp    lxy
+;
+;firing scr_1
+;
+out_scr_1:      lcall   clear_cam
+                ldb     hso_command,#11000000b          
+                ld      hso_time,#0000h
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11100000b
+                ld      hso_time,#0015h 
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11001110b
+                ld      hso_time,#0030h
+                nop
+                nop
+                nop
+                nop
+                lcall   delay
+                ret
+lxe:            sjmp    lxe
+;
+out_scr_2:      lcall   clear_cam  
+                ldb     hso_command,#11000001b          
+                ld      hso_time,#0000h
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11100001b
+                ld      hso_time,#0015h 
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11001110b
+                ld      hso_time,#0030h
+                nop
+                nop
+                nop
+                nop
+                lcall   delay
+                ret
+lxf:            sjmp    lxf
+;
+;
+out_scr_3:      lcall   clear_cam
+                ldb     hso_command,#11000010b          
+                ld      hso_time,#0000h
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11100010b
+                ld      hso_time,#0015h 
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11001110b
+                ld      hso_time,#0030h
+                nop
+                nop
+                nop
+                nop                     
+                lcall   delay
+                ret
+lxg:            sjmp    lxg
+;
+;
+;
+out_scr_4:      lcall   clear_cam
+                ldb     hso_command,#11000011b          
+                ld      hso_time,#0000h
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11100011b
+                ld      hso_time,#0015h 
+                nop
+                nop
+                nop
+                nop
+                ldb     hso_command,#11001110b
+                ld      hso_time,#0030h
+                nop
+                nop
+                nop
+                nop
+                lcall   delay
+                ret
+lxh:            sjmp    lxh
+;
+;subroutine for delay 
+;
+delay:          ld      delay_count,#0ffffh
+continue:       dec     delay_count
+                cmp     delay_count,#0000h
+                jne     pulse_check
+                ret
+lxj:            sjmp    lxj
+;
+;check if next pulse 
+;                              
+pulse_check:    ldb     hsi_mode,#10h
+                ldb     ioc0,#10h
+                andb    ios1_bak,#7fh
+                orb     ios1_bak,ios1
+                andb    ios1_bak,#80h
+                xorb    bak,ios1_bak,prev     
+                jbc     bak,7,continue
+                ret
+lxk:            sjmp    lxk 
+; 
+;clearing the cam and t2 reset
+;
+clear_cam:      ld      timer2,#0000h
+                ldb     ioc2,#0c0h
+                ret
+lxl:            sjmp    lxl
+                end           
+
+ldb     hsi_mode,#10h
+                ldb     

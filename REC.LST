@@ -1,0 +1,53 @@
+ The Microsoft MACRO Assembler , Version 1.25          	Page	1-1
+	 	 	 	 	 	 	04-03-:8    
+
+
+ 0000	 	 	 	        code segment
+ 	 	 	 	        assume cs:code,ds:code 
+ 	 	 	 	        
+ 1000	 	 	 	                org 1000h
+ 1000  BE 1500	 	 	                MOV SI,1500H
+ 1003  B0 36	 	 	 	 	MOV AL,36H
+ 1005  E6 16	 	 	 	 	OUT 16H,AL
+ 1007  B0 05	 	 	 	 	MOV AL,05H
+ 1009  E6 10	 	 	 	 	OUT 10H,AL
+ 100B  B0 01	 	 	 	 	MOV AL,01H
+ 100D  E6 10	 	 	 	 	OUT 10H,AL
+ 100F  B1 05	 	 	 	RELOAD:	MOV CL,05H
+ 1011  E4 0A	 	 	 	CHECK:	IN AL,0AH
+ 1013  A8 02	 	 	 	 	TEST AL,02H
+ 1015  74 FA	 	 	 	 	JZ CHECK
+ 1017  90	 	 	 	 	NOP
+ 1018  90	 	 	 	 	NOP
+ 1019  E4 08	 	 	 	 	IN AL,08H
+ 101B  88 04	 	 	 	 	MOV [SI],AL
+ 101D  46	 	 	 	 	INC SI
+ 101E  3C 3F	 	 	 	 	CMP AL,3FH
+ 1020  75 ED	 	 	 	 	JNZ RELOAD
+ 1022  E2 ED	 	 	 	 	LOOP CHECK
+ 1024  CD 02	 	 	 	 	INT 02
+ 	 	 	 	
+ 1026	 	 	 	        code ends
+ 	 	 	 	                end
+
+ The Microsoft MACRO Assembler , Version 1.25          	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	04-03-:8    
+
+
+Segments and groups:
+
+	 	N a m e	 	 	Size	align	combine	class
+
+CODE . . . . . . . . . . . . . .	1026	PARA  	NONE	
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+CHECK. . . . . . . . . . . . . .	L NEAR 	1011	CODE
+RELOAD . . . . . . . . . . . . .	L NEAR 	100F	CODE
+
+Warning Severe
+Errors	Errors 
+0	0

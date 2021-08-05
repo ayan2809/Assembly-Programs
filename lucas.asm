@@ -1,0 +1,26 @@
+data segment
+n equ 010H
+r equ 05H
+M DW 2H,1H,0H,0H,0H,0H,0H,0H,0H,0H,0H,0H,0H
+data ends
+CODE SEGMENT
+ASSUME CS:CODE, ds: data 
+START:
+MOV AX, data
+MOV ds, AX
+MOV CX,n
+LEA SI,M
+
+RPT:
+MOV AX,M[SI]
+INC SI
+ADD AX,M[SI]
+INC SI
+MOV M[SI],AX
+DEC SI
+LOOP RPT
+
+HLT
+CODE ENDS
+END START
+

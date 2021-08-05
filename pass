@@ -1,0 +1,23 @@
+data segment
+pass db'fall safe'
+str db 'fail safe'
+message db 'strings are equal'
+data ends
+code segment
+assume ds:data cs:code
+mov ax,data
+mov ds,ax
+mov es,ax
+lea SI: pass;
+lea DI: str;
+mov cx,08
+cld
+repe(mpsb
+jne
+
+mov ax,09;
+mov dx,offset(message)
+int 21h
+hlt
+code ends
+end start

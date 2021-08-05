@@ -1,0 +1,16 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+ input  db 10, 0, 10 dup (?)
+ count  db ?
+.CODE
+MAIN PROC
+
+ MOV AX, 3245
+
+MOV BX, 1412
+
+ADD AX, BX
+hlt
+    MAIN ENDP
+END MAIN

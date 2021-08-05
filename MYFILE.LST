@@ -1,0 +1,29 @@
+ The Microsoft MACRO Assembler , Version 1.25          	Page	1-1
+	 	 	 	 	 	 	03-12-;0    
+
+
+ 0000	 	 	 	CODE SEGMENT 
+ 	 	 	 	ASSUME CS:CODE,DS:CODE
+ 4000	 	 	 	ORG 4000H
+ 4000  B8 1004	 	 	MOV AX,[4100]
+ 4003  2D 1006	 	 	SUB AX,[4102]
+ 4006  89 86 1068	 	MOV [4200],AX
+ E r r o r   ---	56:No immediate mode             
+ 400A  F4	 	 	HLT
+ 400B	 	 	 	CODE ENDS
+ 	 	 	 	END
+
+ The Microsoft MACRO Assembler , Version 1.25          	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	03-12-;0    
+
+
+Segments and groups:
+
+	 	N a m e	 	 	Size	align	combine	class
+
+CODE . . . . . . . . . . . . . .	400B	PARA  	NONE	
+
+Warning Severe
+Errors	Errors 
+0	1

@@ -1,0 +1,81 @@
+ The Microsoft MACRO Assembler , Version 1.25          	Page	1-1
+	 	 	 	 	 	 	01-28-:8    
+
+
+ 0000	 	 	 	        code segment
+ 	 	 	 	        assume cs:code,ds:code
+ 1000	 	 	 	        org 1000h
+ 1000  BE 1042	 	 	start1: mov si,1042h
+ 1003  B4 07	 	 	        mov ah,07h
+ 1005  B7 07	 	 	        mov bh,07h
+ 1007  B9 0000	 	 	        mov cx,0000h
+ 100A  BA 184F	 	 	        mov dx,184fh
+ 100D  CD 10	 	 	        int 10h
+ 100F  B4 02	 	 	st1:    mov ah,02h
+ 1011  B7 00	 	 	        mov bh,00h      
+ 1013  E8 102C R	 	        call getclm
+ 1016  E8 104B R	 	        call delay
+ 1019  CD 10	 	 	        int 10h
+ 101B  B4 09	 	 	        mov ah,09h
+ 101D  BA 1037	 	 	        mov dx,1037h
+ 1020  CD 21	 	 	        int 21h
+ 1022  B4 01	 	 	        mov ah,01h
+ 1024  CD 16	 	 	        int 16h
+ 1026  74 E7	 	 	        jz st1
+ 1028  B4 4C	 	 	        mov ah,4ch
+ 102A  CD 21	 	 	        int 21h
+ 	 	 	 	
+ 102C  B6 0B	 	 	getclm: mov dh,0bh
+ 102E  8A 14	 	 	        mov dl,[si]
+ 1030  46	 	 	        inc si
+ 1031  80 FA 4F	 	 	        cmp dl,4fh
+ 1034  74 CA	 	 	        je start1
+ 1036  C3	 	 	        ret
+ 	 	 	 	
+ 1037  52 45 4C 54 45 4E	data:   DB "RELTEN RENU"        
+       20 52 45 4E 55	 	
+ 	 	 	 	
+ 1042  00 0A 14 1E 28 32	ne:    db 00h,0ah,14h,1eh,28h,32h,3ch,46h,4fh  
+	 	 	 	   
+       3C 46 4F	 	 	
+ 	 	 	 	
+ 104B  51	 	 	delay:  push cx
+ 104C  53	 	 	        push bx
+ 104D  B3 FF	 	 	        mov bl,0ffh
+ 104F  B9 FFFF	 	 	v1:     mov cx,0ffffh
+ 1052  E2 FE	 	 	v2:     loop v2
+ 1054  FE CB	 	 	        dec bl
+ 1056  75 F7	 	 	        jnz v1
+ 1058  5B	 	 	        pop bx
+ 1059  59	 	 	        pop cx
+ 105A  C3	 	 	        ret
+ 105B	 	 	 	        code ends
+ 	 	 	 	        end
+
+ The Microsoft MACRO Assembler , Version 1.25          	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	01-28-:8    
+
+
+Segments and groups:
+
+	 	N a m e	 	 	Size	align	combine	class
+
+CODE . . . . . . . . . . . . . .	105B	PARA  	NONE	
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+DATA . . . . . . . . . . . . . .	L NEAR 	1037	CODE
+DELAY. . . . . . . . . . . . . .	L NEAR 	104B	CODE
+GETCLM . . . . . . . . . . . . .	L NEAR 	102C	CODE
+NE . . . . . . . . . . . . . . .	L NEAR 	1042	CODE
+ST1. . . . . . . . . . . . . . .	L NEAR 	100F	CODE
+START1 . . . . . . . . . . . . .	L NEAR 	1000	CODE
+V1 . . . . . . . . . . . . . . .	L NEAR 	104F	CODE
+V2 . . . . . . . . . . . . . . .	L NEAR 	1052	CODE
+
+Warning Severe
+Errors	Errors 
+0	0

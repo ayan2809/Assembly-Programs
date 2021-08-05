@@ -1,0 +1,32 @@
+ The Microsoft MACRO Assembler , Version 1.25          	Page	1-1
+	 	 	 	 	 	 	09-07-;0    
+
+
+ 0000	 	 	 	CODE SEGMENT
+ 	 	 	 	ASSUME CS:CODE,DS:CODE
+ 2000	 	 	 	ORG 2000H
+ 2000  B8 2222	 	 	MOV AX,2222H
+ 2003  BB 1111	 	 	MOV BX,1111H 
+ 2006  03 C3	 	 	ADD AX,BX
+ 2008  BE 1200	 	 	MOV SI,1200H
+ 200B  89 04	 	 	MOV [SI],AX
+ 200D  B4 4C	 	 	MOV AH,4CH
+ 200F  CD 21	 	 	INT 21H
+ 2011  F4	 	 	HLT
+ 2012	 	 	 	CODE ENDS
+ 	 	 	 	END
+
+ The Microsoft MACRO Assembler , Version 1.25          	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	09-07-;0    
+
+
+Segments and groups:
+
+	 	N a m e	 	 	Size	align	combine	class
+
+CODE . . . . . . . . . . . . . .	2012	PARA  	NONE	
+
+Warning Severe
+Errors	Errors 
+0	0
